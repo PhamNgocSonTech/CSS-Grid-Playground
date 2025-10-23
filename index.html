@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/responsive.css">
+    <title>CSS Grid - Từ Cơ Bản Đến Nâng Cao</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎨 CSS Grid - Từ Cơ Bản Đến Nâng Cao</h1>
+
+        <div class="nav-buttons">
+            <button class="nav-btn active" onclick="scrollToSection('basic')">Cơ bản</button>
+            <button class="nav-btn" onclick="scrollToSection('responsive')">Responsive</button>
+            <button class="nav-btn" onclick="scrollToSection('blog')">Blog Layout</button>
+            <button class="nav-btn" onclick="scrollToSection('cards')">Cards</button>
+            <button class="nav-btn" onclick="scrollToSection('dashboard')">Dashboard</button>
+            <button class="nav-btn" onclick="scrollToSection('magazine')">Magazine</button>
+            <button class="nav-btn" onclick="scrollToSection('holy-grail')">Holy Grail</button>
+            <button class="nav-btn" onclick="scrollToSection('gallery')">Gallery</button>
+        </div>
+
+        <!-- Example 1: Basic Grid -->
+        <div class="section" id="basic">
+            <h2>1. Grid Cơ Bản - 3 Cột Bằng Nhau</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Hiển thị danh sách sản phẩm, features, team members<br>
+                <strong>Đặc điểm:</strong> Các cột có kích thước bằng nhau, khoảng cách đều
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: repeat(3, 1fr);<br>
+                gap: 15px;
+            </div>
+            <div class="grid-basic">
+                <div class="item">Item 1</div>
+                <div class="item">Item 2</div>
+                <div class="item">Item 3</div>
+                <div class="item">Item 4</div>
+                <div class="item">Item 5</div>
+                <div class="item">Item 6</div>
+            </div>
+        </div>
+
+        <!-- Example 2: Responsive Grid -->
+        <div class="section" id="responsive">
+            <h2>2. Grid Tự Động Responsive</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Danh sách sản phẩm e-commerce, portfolio, blog posts<br>
+                <strong>Đặc điểm:</strong> Tự động điều chỉnh số cột theo kích thước màn hình
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>
+                gap: 20px;
+            </div>
+            <div class="grid-responsive">
+                <div class="item">Sản phẩm 1</div>
+                <div class="item">Sản phẩm 2</div>
+                <div class="item">Sản phẩm 3</div>
+                <div class="item">Sản phẩm 4</div>
+            </div>
+        </div>
+
+        <!-- Example 3: Blog Layout -->
+        <div class="section" id="blog">
+            <h2>3. Blog Layout - Main + Sidebar</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Blog, tin tức, trang chi tiết sản phẩm<br>
+                <strong>Đặc điểm:</strong> Nội dung chính rộng hơn sidebar
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: 2fr 1fr;<br>
+                gap: 20px;
+            </div>
+            <div class="grid-blog">
+                <div class="main-content">
+                    <h3>Bài viết chính</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris.</p>
+                </div>
+                <div class="sidebar">
+                    <h3>Sidebar</h3>
+                    <p>- Bài viết liên quan<br>- Quảng cáo<br>- Thông tin thêm</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 4: Card Grid -->
+        <div class="section" id="cards">
+            <h2>4. Card Grid - Hiện Đại</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Danh sách sản phẩm, dịch vụ, portfolio<br>
+                <strong>Đặc điểm:</strong> Cards với hiệu ứng hover, responsive tự động
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));<br>
+                gap: 25px;
+            </div>
+            <div class="grid-cards">
+                <div class="card">
+                    <div class="card-img">📱</div>
+                    <div class="card-body">
+                        <h3 class="card-title">Mobile App</h3>
+                        <p>Phát triển ứng dụng di động</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">🌐</div>
+                    <div class="card-body">
+                        <h3 class="card-title">Web Design</h3>
+                        <p>Thiết kế website chuyên nghiệp</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">⚡</div>
+                    <div class="card-body">
+                        <h3 class="card-title">Performance</h3>
+                        <p>Tối ưu hiệu suất cao</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-img">🎨</div>
+                    <div class="card-body">
+                        <h3 class="card-title">UI/UX</h3>
+                        <p>Trải nghiệm người dùng tốt nhất</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 5: Dashboard Layout -->
+        <div class="section" id="dashboard">
+            <h2>5. Dashboard Layout - Admin Panel</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Admin dashboard, analytics, monitoring<br>
+                <strong>Đặc điểm:</strong> Các widget có kích thước khác nhau, sử dụng grid-column/row span
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: repeat(4, 1fr);<br>
+                gap: 20px;<br>
+                .large { grid-column: span 2; }<br>
+                .tall { grid-row: span 2; }
+            </div>
+            <div class="grid-dashboard">
+                <div class="dashboard-item">
+                    <h4>Người dùng</h4>
+                    <div class="stat">1,234</div>
+                    <p>+12% tháng này</p>
+                </div>
+                <div class="dashboard-item">
+                    <h4>Doanh thu</h4>
+                    <div class="stat">$45K</div>
+                    <p>+8% tháng này</p>
+                </div>
+                <div class="dashboard-item large tall">
+                    <h4>Biểu đồ doanh thu</h4>
+                    <div class="stat">📊</div>
+                    <p>Thống kê chi tiết theo tháng</p>
+                </div>
+                <div class="dashboard-item">
+                    <h4>Đơn hàng</h4>
+                    <div class="stat">567</div>
+                    <p>+15% tháng này</p>
+                </div>
+                <div class="dashboard-item">
+                    <h4>Lượt truy cập</h4>
+                    <div class="stat">8.9K</div>
+                    <p>+20% tháng này</p>
+                </div>
+                <div class="dashboard-item large">
+                    <h4>Hoạt động gần đây</h4>
+                    <p>• Đơn hàng #1234 đã hoàn thành<br>• User mới đăng ký<br>• Thanh toán thành công</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 6: Magazine Layout -->
+        <div class="section" id="magazine">
+            <h2>6. Magazine Layout - Bố Cục Tạp Chí</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Landing page, portfolio, news website<br>
+                <strong>Đặc điểm:</strong> Layout phức tạp với các kích thước khác nhau, tạo điểm nhấn
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: repeat(6, 1fr);<br>
+                grid-template-rows: repeat(4, 150px);<br>
+                gap: 15px;
+            </div>
+            <div class="grid-magazine">
+                <div class="magazine-item feature">
+                    <span>Bài viết nổi bật</span>
+                </div>
+                <div class="magazine-item small">
+                    <span>Tin tức 1</span>
+                </div>
+                <div class="magazine-item small">
+                    <span>Tin tức 2</span>
+                </div>
+                <div class="magazine-item medium">
+                    <span>Chủ đề hot</span>
+                </div>
+                <div class="magazine-item medium">
+                    <span>Xu hướng</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 7: Holy Grail Layout -->
+        <div class="section" id="holy-grail">
+            <h2>7. Holy Grail Layout - Bố Cục Kinh Điển</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Website truyền thống, trang quản trị<br>
+                <strong>Đặc điểm:</strong> Header, footer full width, main content với 2 sidebar
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-areas:<br>
+                "header header header"<br>
+                "nav main sidebar"<br>
+                "footer footer footer";<br>
+                grid-template-columns: 200px 1fr 200px;
+            </div>
+            <div class="grid-holy-grail">
+                <div class="holy-header">
+                    <h3>Header</h3>
+                </div>
+                <div class="holy-nav">
+                    <h4>Navigation</h4>
+                    <p>• Menu 1<br>• Menu 2<br>• Menu 3</p>
+                </div>
+                <div class="holy-main">
+                    <h4>Main Content</h4>
+                    <p>Nội dung chính của trang web. Đây là nơi hiển thị nội dung quan trọng nhất.</p>
+                </div>
+                <div class="holy-sidebar">
+                    <h4>Sidebar</h4>
+                    <p>Thông tin phụ, quảng cáo</p>
+                </div>
+                <div class="holy-footer">
+                    <h3>Footer</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Example 8: Image Gallery -->
+        <div class="section" id="gallery">
+            <h2>8. Image Gallery - Thư Viện Ảnh Nâng Cao</h2>
+            <div class="description">
+                <strong>Khi nào dùng:</strong> Portfolio, thư viện ảnh, gallery<br>
+                <strong>Đặc điểm:</strong> Ảnh có kích thước khác nhau, tự động điều chỉnh
+            </div>
+            <div class="code">
+                display: grid;<br>
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>
+                grid-auto-rows: 200px;<br>
+                .wide { grid-column: span 2; }<br>
+                .tall { grid-row: span 2; }
+            </div>
+            <div class="grid-gallery">
+                <div class="gallery-item wide tall">Ảnh lớn</div>
+                <div class="gallery-item">Ảnh 1</div>
+                <div class="gallery-item tall">Ảnh 2</div>
+                <div class="gallery-item">Ảnh 3</div>
+                <div class="gallery-item wide">Ảnh 4</div>
+                <div class="gallery-item">Ảnh 5</div>
+                <div class="gallery-item">Ảnh 6</div>
+                <div class="gallery-item wide">Ảnh 7</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+
+            // Update active button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>
