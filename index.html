@@ -4,292 +4,971 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <link rel="stylesheet" href="./assets/css/responsive.css">
-    <title>CSS Grid - Từ Cơ Bản Đến Nâng Cao</title>
+    <title>CSS Grid Playground</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .lesson {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .lesson-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .lesson-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .lesson-title {
+            color: #667eea;
+            font-size: 1.8em;
+            margin: 0;
+        }
+
+        .theory {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid #667eea;
+        }
+
+        .theory h3 {
+            color: #667eea;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .theory-icon {
+            font-size: 24px;
+        }
+
+        .theory p {
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #68d391;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-label {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 5px;
+            font-size: 11px;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .demo-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .demo-label {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .key-points {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .key-points h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .key-points ul {
+            margin-left: 20px;
+        }
+
+        .key-points li {
+            margin-bottom: 8px;
+        }
+
+        /* Demo 1: Basic Grid */
+        .grid-demo-1 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .grid-demo-1 .item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .grid-demo-1 .item::after {
+            content: attr(data-size);
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+        }
+
+        /* Demo 2: Gap */
+        .gap-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .gap-demo {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #667eea;
+        }
+
+        .gap-demo-title {
+            text-align: center;
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .grid-no-gap {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0;
+        }
+
+        .grid-with-gap {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .gap-demo .item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Demo 3: Responsive */
+        .grid-demo-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-demo-3 .item {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Demo 4: Span */
+        .grid-demo-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .grid-demo-4 .item {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .grid-demo-4 .span-2 {
+            grid-column: span 2;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .grid-demo-4 .span-3 {
+            grid-column: span 3;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+        }
+
+        /* Demo 5: Areas */
+        .grid-demo-5 {
+            display: grid;
+            grid-template-areas:
+                "header header header"
+                "sidebar main main"
+                "footer footer footer";
+            grid-template-columns: 200px 1fr 1fr;
+            gap: 15px;
+            min-height: 300px;
+        }
+
+        .grid-demo-5 .header {
+            grid-area: header;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .grid-demo-5 .sidebar {
+            grid-area: sidebar;
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .grid-demo-5 .main {
+            grid-area: main;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .grid-demo-5 .footer {
+            grid-area: footer;
+            background: linear-gradient(135deg, #43e97b, #38f9d7);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Demo 6: Alignment */
+        .alignment-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .align-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 15px;
+            min-height: 200px;
+        }
+
+        .align-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .align-container {
+            display: grid;
+            height: 150px;
+            background: #f8f9fa;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .align-start {
+            align-items: start;
+        }
+
+        .align-center {
+            align-items: center;
+        }
+
+        .align-end {
+            align-items: end;
+        }
+
+        .align-item {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .interactive-controls {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        /* Interactive grid specific styles */
+        #interactive-grid {
+            min-height: 300px;
+        }
+
+        #interactive-grid .item {
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-label {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .control-input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn:hover,
+        .btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .gap-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .alignment-demo {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-demo-5 {
+                grid-template-areas:
+                    "header"
+                    "sidebar"
+                    "main"
+                    "footer";
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>🎨 CSS Grid - Từ Cơ Bản Đến Nâng Cao</h1>
+        <h1>🎨 CSS Grid - Học Tương Tác Từng Bước</h1>
 
-        <div class="nav-buttons">
-            <button class="nav-btn active" onclick="scrollToSection('basic')">Cơ bản</button>
-            <button class="nav-btn" onclick="scrollToSection('responsive')">Responsive</button>
-            <button class="nav-btn" onclick="scrollToSection('blog')">Blog Layout</button>
-            <button class="nav-btn" onclick="scrollToSection('cards')">Cards</button>
-            <button class="nav-btn" onclick="scrollToSection('dashboard')">Dashboard</button>
-            <button class="nav-btn" onclick="scrollToSection('magazine')">Magazine</button>
-            <button class="nav-btn" onclick="scrollToSection('holy-grail')">Holy Grail</button>
-            <button class="nav-btn" onclick="scrollToSection('gallery')">Gallery</button>
+        <!-- Lesson 1 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">1</div>
+                <h2 class="lesson-title">Grid Container và Grid Items</h2>
+            </div>
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>Grid Container:</strong> Là phần tử cha có thuộc tính <code>display: grid</code></p>
+                <p><strong>Grid Items:</strong> Là các phần tử con trực tiếp của Grid Container</p>
+                <p><strong>Cách hoạt động:</strong> Khi bạn thêm <code>display: grid</code> vào một phần tử, tất cả con
+                    trực tiếp của nó sẽ trở thành grid items.</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                .container {
+                display: grid; /* Biến thành Grid Container */
+                }
+
+                .item {
+                /* Tự động trở thành Grid Item */
+                }
+            </div>
+
+            <div class="key-points">
+                <h4>💡 Điểm quan trọng:</h4>
+                <ul>
+                    <li>Chỉ con <strong>trực tiếp</strong> mới là grid items</li>
+                    <li>Mặc định: grid có 1 cột, items xếp theo chiều dọc</li>
+                    <li>Grid không ảnh hưởng đến các cháu (grandchildren)</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Demo Thực Tế</div>
+                <div class="grid-demo-1">
+                    <div class="item" data-size="1fr">Item 1</div>
+                    <div class="item" data-size="1fr">Item 2</div>
+                    <div class="item" data-size="1fr">Item 3</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Example 1: Basic Grid -->
-        <div class="section" id="basic">
-            <h2>1. Grid Cơ Bản - 3 Cột Bằng Nhau</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Hiển thị danh sách sản phẩm, features, team members<br>
-                <strong>Đặc điểm:</strong> Các cột có kích thước bằng nhau, khoảng cách đều
+        <!-- Lesson 2 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">2</div>
+                <h2 class="lesson-title">Grid Template Columns - Định Nghĩa Cột</h2>
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: repeat(3, 1fr);<br>
-                gap: 15px;
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>grid-template-columns:</strong> Định nghĩa số lượng và kích thước các cột</p>
+                <p><strong>Đơn vị fr (fraction):</strong> Chia không gian còn lại thành các phần bằng nhau</p>
+                <p><strong>repeat():</strong> Hàm lặp lại giá trị để code ngắn gọn hơn</p>
             </div>
-            <div class="grid-basic">
-                <div class="item">Item 1</div>
-                <div class="item">Item 2</div>
-                <div class="item">Item 3</div>
-                <div class="item">Item 4</div>
-                <div class="item">Item 5</div>
-                <div class="item">Item 6</div>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                /* 3 cột bằng nhau */
+                grid-template-columns: 1fr 1fr 1fr;
+
+                /* Viết tắt bằng repeat */
+                grid-template-columns: repeat(3, 1fr);
+
+                /* Cột có kích thước khác nhau */
+                grid-template-columns: 200px 1fr 2fr;
+            </div>
+
+            <div class="key-points">
+                <h4>💡 Giải thích:</h4>
+                <ul>
+                    <li><strong>1fr:</strong> Chiếm 1 phần không gian</li>
+                    <li><strong>2fr:</strong> Chiếm 2 phần (gấp đôi 1fr)</li>
+                    <li><strong>200px:</strong> Kích thước cố định</li>
+                    <li><strong>repeat(3, 1fr):</strong> Lặp "1fr" 3 lần</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Demo: 3 Cột Bằng Nhau</div>
+                <div class="grid-demo-1">
+                    <div class="item" data-size="1fr">1fr</div>
+                    <div class="item" data-size="1fr">1fr</div>
+                    <div class="item" data-size="1fr">1fr</div>
+                    <div class="item" data-size="1fr">1fr</div>
+                    <div class="item" data-size="1fr">1fr</div>
+                    <div class="item" data-size="1fr">1fr</div>
+                </div>
             </div>
         </div>
 
-        <!-- Example 2: Responsive Grid -->
-        <div class="section" id="responsive">
-            <h2>2. Grid Tự Động Responsive</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Danh sách sản phẩm e-commerce, portfolio, blog posts<br>
-                <strong>Đặc điểm:</strong> Tự động điều chỉnh số cột theo kích thước màn hình
+        <!-- Lesson 3 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">3</div>
+                <h2 class="lesson-title">Gap - Khoảng Cách Giữa Items</h2>
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>gap:</strong> Tạo khoảng cách giữa các grid items (thay thế margin)</p>
+                <p><strong>row-gap:</strong> Khoảng cách giữa các hàng</p>
+                <p><strong>column-gap:</strong> Khoảng cách giữa các cột</p>
+            </div>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                /* Cách 1: Gap cho cả hàng và cột */
                 gap: 20px;
-            </div>
-            <div class="grid-responsive">
-                <div class="item">Sản phẩm 1</div>
-                <div class="item">Sản phẩm 2</div>
-                <div class="item">Sản phẩm 3</div>
-                <div class="item">Sản phẩm 4</div>
-            </div>
-        </div>
 
-        <!-- Example 3: Blog Layout -->
-        <div class="section" id="blog">
-            <h2>3. Blog Layout - Main + Sidebar</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Blog, tin tức, trang chi tiết sản phẩm<br>
-                <strong>Đặc điểm:</strong> Nội dung chính rộng hơn sidebar
-            </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: 2fr 1fr;<br>
-                gap: 20px;
-            </div>
-            <div class="grid-blog">
-                <div class="main-content">
-                    <h3>Bài viết chính</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
-                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                        laboris.</p>
-                </div>
-                <div class="sidebar">
-                    <h3>Sidebar</h3>
-                    <p>- Bài viết liên quan<br>- Quảng cáo<br>- Thông tin thêm</p>
-                </div>
-            </div>
-        </div>
+                /* Cách 2: Gap riêng */
+                row-gap: 20px;
+                column-gap: 15px;
 
-        <!-- Example 4: Card Grid -->
-        <div class="section" id="cards">
-            <h2>4. Card Grid - Hiện Đại</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Danh sách sản phẩm, dịch vụ, portfolio<br>
-                <strong>Đặc điểm:</strong> Cards với hiệu ứng hover, responsive tự động
+                /* Cách 3: Shorthand */
+                gap: 20px 15px; /* hàng cột */
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));<br>
-                gap: 25px;
+
+            <div class="key-points">
+                <h4>💡 Tại sao dùng gap thay vì margin?</h4>
+                <ul>
+                    <li>Không tạo khoảng cách ở rìa ngoài</li>
+                    <li>Code ngắn gọn hơn</li>
+                    <li>Dễ điều chỉnh responsive</li>
+                </ul>
             </div>
-            <div class="grid-cards">
-                <div class="card">
-                    <div class="card-img">📱</div>
-                    <div class="card-body">
-                        <h3 class="card-title">Mobile App</h3>
-                        <p>Phát triển ứng dụng di động</p>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ So Sánh: Có Gap vs Không Gap</div>
+                <div class="gap-comparison">
+                    <div class="gap-demo">
+                        <div class="gap-demo-title">❌ Không có Gap</div>
+                        <div class="grid-no-gap">
+                            <div class="item">1</div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                            <div class="item">4</div>
+                        </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-img">🌐</div>
-                    <div class="card-body">
-                        <h3 class="card-title">Web Design</h3>
-                        <p>Thiết kế website chuyên nghiệp</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img">⚡</div>
-                    <div class="card-body">
-                        <h3 class="card-title">Performance</h3>
-                        <p>Tối ưu hiệu suất cao</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-img">🎨</div>
-                    <div class="card-body">
-                        <h3 class="card-title">UI/UX</h3>
-                        <p>Trải nghiệm người dùng tốt nhất</p>
+                    <div class="gap-demo">
+                        <div class="gap-demo-title">✅ Có Gap: 15px</div>
+                        <div class="grid-with-gap">
+                            <div class="item">1</div>
+                            <div class="item">2</div>
+                            <div class="item">3</div>
+                            <div class="item">4</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Example 5: Dashboard Layout -->
-        <div class="section" id="dashboard">
-            <h2>5. Dashboard Layout - Admin Panel</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Admin dashboard, analytics, monitoring<br>
-                <strong>Đặc điểm:</strong> Các widget có kích thước khác nhau, sử dụng grid-column/row span
+        <!-- Lesson 4 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">4</div>
+                <h2 class="lesson-title">Auto-fit và Minmax - Grid Tự Động Responsive</h2>
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: repeat(4, 1fr);<br>
-                gap: 20px;<br>
-                .large { grid-column: span 2; }<br>
-                .tall { grid-row: span 2; }
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>auto-fit:</strong> Tự động điều chỉnh số cột dựa trên kích thước màn hình</p>
+                <p><strong>minmax():</strong> Định nghĩa kích thước min và max của cột</p>
+                <p><strong>Kết hợp:</strong> Tạo grid responsive không cần media query</p>
             </div>
-            <div class="grid-dashboard">
-                <div class="dashboard-item">
-                    <h4>Người dùng</h4>
-                    <div class="stat">1,234</div>
-                    <p>+12% tháng này</p>
-                </div>
-                <div class="dashboard-item">
-                    <h4>Doanh thu</h4>
-                    <div class="stat">$45K</div>
-                    <p>+8% tháng này</p>
-                </div>
-                <div class="dashboard-item large tall">
-                    <h4>Biểu đồ doanh thu</h4>
-                    <div class="stat">📊</div>
-                    <p>Thống kê chi tiết theo tháng</p>
-                </div>
-                <div class="dashboard-item">
-                    <h4>Đơn hàng</h4>
-                    <div class="stat">567</div>
-                    <p>+15% tháng này</p>
-                </div>
-                <div class="dashboard-item">
-                    <h4>Lượt truy cập</h4>
-                    <div class="stat">8.9K</div>
-                    <p>+20% tháng này</p>
-                </div>
-                <div class="dashboard-item large">
-                    <h4>Hoạt động gần đây</h4>
-                    <p>• Đơn hàng #1234 đã hoàn thành<br>• User mới đăng ký<br>• Thanh toán thành công</p>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                /* Grid tự động responsive */
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+                /* Giải thích:
+                - auto-fit: Tự động tính số cột phù hợp
+                - minmax(200px, 1fr): Mỗi cột tối thiểu 200px, tối đa 1fr
+                - Kết quả: Tự động xuống hàng khi không đủ chỗ
+                */
+            </div>
+
+            <div class="key-points">
+                <h4>💡 Cách hoạt động:</h4>
+                <ul>
+                    <li>Màn hình rộng: Nhiều cột</li>
+                    <li>Màn hình hẹp: Ít cột hơn</li>
+                    <li>Tự động xuống hàng khi < 200px</li>
+                    <li>Không cần viết media query!</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Demo: Thử Resize Cửa Sổ!</div>
+                <div class="grid-demo-3">
+                    <div class="item">Sản phẩm 1</div>
+                    <div class="item">Sản phẩm 2</div>
+                    <div class="item">Sản phẩm 3</div>
+                    <div class="item">Sản phẩm 4</div>
+                    <div class="item">Sản phẩm 5</div>
                 </div>
             </div>
         </div>
 
-        <!-- Example 6: Magazine Layout -->
-        <div class="section" id="magazine">
-            <h2>6. Magazine Layout - Bố Cục Tạp Chí</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Landing page, portfolio, news website<br>
-                <strong>Đặc điểm:</strong> Layout phức tạp với các kích thước khác nhau, tạo điểm nhấn
+        <!-- Lesson 5 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">5</div>
+                <h2 class="lesson-title">Grid Column Span - Item Chiếm Nhiều Cột</h2>
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: repeat(6, 1fr);<br>
-                grid-template-rows: repeat(4, 150px);<br>
-                gap: 15px;
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>grid-column:</strong> Định nghĩa item chiếm bao nhiêu cột</p>
+                <p><strong>span:</strong> Số cột mà item sẽ chiếm (kéo dài)</p>
+                <p><strong>Ứng dụng:</strong> Tạo layout phức tạp, highlight item quan trọng</p>
             </div>
-            <div class="grid-magazine">
-                <div class="magazine-item feature">
-                    <span>Bài viết nổi bật</span>
-                </div>
-                <div class="magazine-item small">
-                    <span>Tin tức 1</span>
-                </div>
-                <div class="magazine-item small">
-                    <span>Tin tức 2</span>
-                </div>
-                <div class="magazine-item medium">
-                    <span>Chủ đề hot</span>
-                </div>
-                <div class="magazine-item medium">
-                    <span>Xu hướng</span>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                /* Grid 4 cột */
+                .container {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                }
+
+                /* Item chiếm 2 cột */
+                .item-large {
+                grid-column: span 2;
+                }
+
+                /* Item chiếm 3 cột */
+                .item-xlarge {
+                grid-column: span 3;
+                }
+            </div>
+
+            <div class="key-points">
+                <h4>💡 Cách tính:</h4>
+                <ul>
+                    <li><strong>span 1:</strong> Chiếm 1 cột (mặc định)</li>
+                    <li><strong>span 2:</strong> Chiếm 2 cột liền kề</li>
+                    <li><strong>span 3:</strong> Chiếm 3 cột liền kề</li>
+                    <li>Tự động xuống hàng nếu không đủ chỗ</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Demo: Grid 4 Cột với Span</div>
+                <div class="grid-demo-4">
+                    <div class="item">1 cột</div>
+                    <div class="item">1 cột</div>
+                    <div class="item span-2">Span 2 cột</div>
+                    <div class="item">1 cột</div>
+                    <div class="item span-3">Span 3 cột</div>
+                    <div class="item">1 cột</div>
+                    <div class="item">1 cột</div>
                 </div>
             </div>
         </div>
 
-        <!-- Example 7: Holy Grail Layout -->
-        <div class="section" id="holy-grail">
-            <h2>7. Holy Grail Layout - Bố Cục Kinh Điển</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Website truyền thống, trang quản trị<br>
-                <strong>Đặc điểm:</strong> Header, footer full width, main content với 2 sidebar
+        <!-- Lesson 6 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">6</div>
+                <h2 class="lesson-title">Grid Template Areas - Đặt Tên Vùng</h2>
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-areas:<br>
-                "header header header"<br>
-                "nav main sidebar"<br>
-                "footer footer footer";<br>
-                grid-template-columns: 200px 1fr 200px;
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>grid-template-areas:</strong> Đặt tên cho các vùng trong grid</p>
+                <p><strong>grid-area:</strong> Gán item vào vùng đã đặt tên</p>
+                <p><strong>Ưu điểm:</strong> Dễ hình dung layout, code dễ đọc</p>
             </div>
-            <div class="grid-holy-grail">
-                <div class="holy-header">
-                    <h3>Header</h3>
-                </div>
-                <div class="holy-nav">
-                    <h4>Navigation</h4>
-                    <p>• Menu 1<br>• Menu 2<br>• Menu 3</p>
-                </div>
-                <div class="holy-main">
-                    <h4>Main Content</h4>
-                    <p>Nội dung chính của trang web. Đây là nơi hiển thị nội dung quan trọng nhất.</p>
-                </div>
-                <div class="holy-sidebar">
-                    <h4>Sidebar</h4>
-                    <p>Thông tin phụ, quảng cáo</p>
-                </div>
-                <div class="holy-footer">
-                    <h3>Footer</h3>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                .container {
+                display: grid;
+                grid-template-areas:
+                "header header header"
+                "sidebar main main"
+                "footer footer footer";
+                grid-template-columns: 200px 1fr 1fr;
+                }
+
+                .header { grid-area: header; }
+                .sidebar { grid-area: sidebar; }
+                .main { grid-area: main; }
+                .footer { grid-area: footer; }
+            </div>
+
+            <div class="key-points">
+                <h4>💡 Quy tắc:</h4>
+                <ul>
+                    <li>Mỗi dòng trong dấu ngoặc là 1 hàng</li>
+                    <li>Tên giống nhau = item chiếm nhiều ô</li>
+                    <li>Dùng dấu chấm "." cho ô trống</li>
+                    <li>Tên phải tạo thành hình chữ nhật</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Demo: Layout với Areas</div>
+                <div class="grid-demo-5">
+                    <div class="header">Header (3 cột)</div>
+                    <div class="sidebar">Sidebar (1 cột)</div>
+                    <div class="main">Main (2 cột)</div>
+                    <div class="footer">Footer (3 cột)</div>
                 </div>
             </div>
         </div>
 
-        <!-- Example 8: Image Gallery -->
-        <div class="section" id="gallery">
-            <h2>8. Image Gallery - Thư Viện Ảnh Nâng Cao</h2>
-            <div class="description">
-                <strong>Khi nào dùng:</strong> Portfolio, thư viện ảnh, gallery<br>
-                <strong>Đặc điểm:</strong> Ảnh có kích thước khác nhau, tự động điều chỉnh
+        <!-- Lesson 7 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">7</div>
+                <h2 class="lesson-title">Alignment - Căn Chỉnh Items</h2>
             </div>
-            <div class="code">
-                display: grid;<br>
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));<br>
-                grid-auto-rows: 200px;<br>
-                .wide { grid-column: span 2; }<br>
-                .tall { grid-row: span 2; }
+
+            <div class="theory">
+                <h3><span class="theory-icon">📚</span>Lý thuyết</h3>
+                <p><strong>align-items:</strong> Căn chỉnh theo chiều dọc (vertical)</p>
+                <p><strong>justify-items:</strong> Căn chỉnh theo chiều ngang (horizontal)</p>
+                <p><strong>place-items:</strong> Shorthand cho cả hai (vertical horizontal)</p>
             </div>
-            <div class="grid-gallery">
-                <div class="gallery-item wide tall">Ảnh lớn</div>
-                <div class="gallery-item">Ảnh 1</div>
-                <div class="gallery-item tall">Ảnh 2</div>
-                <div class="gallery-item">Ảnh 3</div>
-                <div class="gallery-item wide">Ảnh 4</div>
-                <div class="gallery-item">Ảnh 5</div>
-                <div class="gallery-item">Ảnh 6</div>
-                <div class="gallery-item wide">Ảnh 7</div>
+
+            <div class="code-block">
+                <div class="code-label">CSS</div>
+                /* Căn chỉnh dọc */
+                align-items: start; /* Trên */
+                align-items: center; /* Giữa */
+                align-items: end; /* Dưới */
+
+                /* Căn chỉnh ngang */
+                justify-items: start; /* Trái */
+                justify-items: center; /* Giữa */
+                justify-items: end; /* Phải */
+
+                /* Shorthand */
+                place-items: center center; /* Giữa cả 2 chiều */
+            </div>
+
+            <div class="key-points">
+                <h4>💡 Ghi nhớ:</h4>
+                <ul>
+                    <li><strong>align-</strong> = Dọc (↕️)</li>
+                    <li><strong>justify-</strong> = Ngang (↔️)</li>
+                    <li><strong>-items</strong> = Áp dụng cho tất cả items</li>
+                    <li><strong>-self</strong> = Áp dụng cho 1 item riêng</li>
+                </ul>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Demo: Các Kiểu Căn Chỉnh</div>
+                <div class="alignment-demo">
+                    <div class="align-box">
+                        <div class="align-title">align-items: start</div>
+                        <div class="align-container align-start">
+                            <div class="align-item">Item
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-box">
+                        <div class="align-title">align-items: center</div>
+                        <div class="align-container align-center">
+                            <div class="align-item">Item</div>
+                        </div>
+                    </div>
+                    <div class="align-box">
+                        <div class="align-title">align-items: end</div>
+                        <div class="align-container align-end">
+                            <div class="align-item">Item</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lesson 8 -->
+        <div class="lesson">
+            <div class="lesson-header">
+                <div class="lesson-number">8</div>
+                <h2 class="lesson-title">Thực Hành Tương Tác - Tạo Grid Của Bạn</h2>
+            </div>
+
+            <div class="theory">
+                <h3><span class="theory-icon">🎮</span>Thử Nghiệm</h3>
+                <p>Sử dụng các controls bên dưới để tạo grid layout theo ý bạn!</p>
+            </div>
+
+            <div class="interactive-controls">
+                <div class="control-group">
+                    <label class="control-label">Số cột:</label>
+                    <div class="btn-group">
+                        <button class="btn active" onclick="changeColumns(2)">2 cột</button>
+                        <button class="btn" onclick="changeColumns(3)">3 cột</button>
+                        <button class="btn" onclick="changeColumns(4)">4 cột</button>
+                        <button class="btn" onclick="changeColumns(5)">5 cột</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Gap (khoảng cách):</label>
+                    <input type="range" class="control-input" min="0" max="50" value="15"
+                        oninput="changeGap(this.value)">
+                    <span id="gap-value">15px</span>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Căn chỉnh dọc:</label>
+                    <div class="btn-group">
+                        <button class="btn" onclick="changeAlign('start')">Start</button>
+                        <button class="btn active" onclick="changeAlign('center')">Center</button>
+                        <button class="btn" onclick="changeAlign('end')">End</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Chiều cao item:</label>
+                    <input type="range" class="control-input" min="50" max="200" value="100"
+                        oninput="changeHeight(this.value)">
+                    <span id="height-value">100px</span>
+                </div>
+            </div>
+
+            <div class="demo-section">
+                <div class="demo-label">✨ Grid Của Bạn</div>
+                <div id="interactive-grid" class="grid-demo-1" style="align-items: center;">
+                    <div class="item" data-size="1fr">Item 1</div>
+                    <div class="item" data-size="1fr">Item 2</div>
+                    <div class="item" data-size="1fr">Item 3</div>
+                    <div class="item" data-size="1fr">Item 4</div>
+                    <div class="item" data-size="1fr">Item 5</div>
+                    <div class="item" data-size="1fr">Item 6</div>
+                    <div class="item" data-size="1fr">Item 7</div>
+                    <div class="item" data-size="1fr">Item 8</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="lesson" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white;">
+            <div class="lesson-header" style="border-bottom-color: white;">
+                <div class="lesson-number" style="background: white; color: #667eea;">✓</div>
+                <h2 class="lesson-title" style="color: white;">Tóm Tắt CSS Grid</h2>
+            </div>
+
+            <div style="font-size: 1.1em; line-height: 1.8;">
+                <p><strong>🎯 Những gì bạn đã học:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 15px;">
+                    <li><strong>display: grid</strong> - Tạo grid container</li>
+                    <li><strong>grid-template-columns</strong> - Định nghĩa cột</li>
+                    <li><strong>gap</strong> - Khoảng cách giữa items</li>
+                    <li><strong>repeat() & fr</strong> - Tạo cột nhanh và linh hoạt</li>
+                    <li><strong>auto-fit & minmax()</strong> - Grid responsive tự động</li>
+                    <li><strong>grid-column: span</strong> - Item chiếm nhiều cột</li>
+                    <li><strong>grid-template-areas</strong> - Đặt tên vùng layout</li>
+                    <li><strong>align-items & justify-items</strong> - Căn chỉnh items</li>
+                </ul>
+
+                <p style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                    <strong>💪 Tip Pro:</strong> CSS Grid xuất sắc cho layout 2D (hàng + cột).
+                    Kết hợp với Flexbox (cho layout 1D) để tạo giao diện hoàn hảo!
+                </p>
             </div>
         </div>
     </div>
 
     <script>
-        function scrollToSection(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        // Interactive controls
+        function changeColumns(num) {
+            const grid = document.getElementById('interactive-grid');
+            grid.style.gridTemplateColumns = `repeat(${num}, 1fr)`;
 
             // Update active button
-            document.querySelectorAll('.nav-btn').forEach(btn => {
+            document.querySelectorAll('.control-group:first-child .btn').forEach(btn => {
                 btn.classList.remove('active');
             });
             event.target.classList.add('active');
+        }
+
+        function changeGap(value) {
+            const grid = document.getElementById('interactive-grid');
+            grid.style.gap = `${value}px`;
+            document.getElementById('gap-value').textContent = `${value}px`;
+        }
+
+        function changeAlign(value) {
+            const grid = document.getElementById('interactive-grid');
+            grid.style.alignItems = value;
+
+            // Update active button
+            document.querySelectorAll('.control-group:nth-child(3) .btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function changeHeight(value) {
+            const items = document.querySelectorAll('#interactive-grid .item');
+            items.forEach(item => {
+                item.style.minHeight = `${value}px`;
+            });
+            document.getElementById('height-value').textContent = `${value}px`;
         }
     </script>
 </body>
